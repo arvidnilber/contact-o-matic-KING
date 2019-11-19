@@ -718,6 +718,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@bartvanvliet/vuex-module-decorators@^0.9.11":
+  version "0.9.11"
+  resolved "https://registry.yarnpkg.com/@bartvanvliet/vuex-module-decorators/-/vuex-module-decorators-0.9.11.tgz#d142967765acfdcc3660fa7bd524ab0a0b17fa86"
+  integrity sha512-e3H0mXWhxo060DANTPEho+2FGyUEPE+QUrWA7lj/q4fkt0YrKrZbwHAAnj2QI4OvKchBQOJp/GmYDosAIdXXaQ==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -9846,11 +9851,6 @@ vuetify@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.1.9.tgz#2c91163090675cde2cd1b6208829ac434d7d8877"
   integrity sha512-52CgEyPoGYHba5yocYKBB/LXcikoWzj9jCDTH8LlzH/hvjzkgsuEtFwUustGHyV9GstRaNZOrk4nuUWbPZc3kQ==
-
-vuex-module-decorators@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/vuex-module-decorators/-/vuex-module-decorators-0.11.0.tgz#1da409385f001dc45fffcc292f4a7895cdf8db27"
-  integrity sha512-mQeH0F9C5eoDvhOxGLxc2eKAA+GT9MvCyauZZtQSvLjN3PX//oj9mlhpmMJH2/q9LOScZ8fBrX1qqd+aOKq/LA==
 
 vuex-persist@^2.1.1:
   version "2.1.1"

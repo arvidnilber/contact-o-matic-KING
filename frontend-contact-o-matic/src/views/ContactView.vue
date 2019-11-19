@@ -1,19 +1,23 @@
 <template>
-  <div class="flex justify-center align-center">
-    <EditContact :contactItem="contactItem"></EditContact>
+  <div class="flex flex-col justify-center align-center text-center">
+      <EditContact :contactItem="contactItem"></EditContact>
+      <ContactNotes :contactId="contactId"></ContactNotes>
   </div>
 </template>
 
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { ContactItem } from "@/App.vue";
-import { NoteItem } from "@/App.vue";
-import EditContact from '@/components/EditContact.vue'
-import ContactModule from '@/store/modules/ContactModule'
+import { ContactItem } from "../App.vue";
+import { NoteItem } from "../App.vue";
+import EditContact from '../components/EditContact.vue'
+import ContactModule from '../store/modules/ContactModule'
+import ContactNotes from '../components/ContactNotes.vue'
+
 @Component({
   components: {
-    EditContact
+    EditContact,
+    ContactNotes
   }
 })
 export default class ContactView extends Vue {
@@ -21,10 +25,13 @@ export default class ContactView extends Vue {
   created() {
     this.getContact()
   }
-
   getContact(){
     const contacts = ContactModule.contactList[parseInt(this.$route.params.id)]
     this.contactItem = contacts
+  }
+  
+  get contactId(){
+    return this.$route.params.id
   }
   // getContacts(id: string) {
   //   this.$http∏∏

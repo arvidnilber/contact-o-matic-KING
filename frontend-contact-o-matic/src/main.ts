@@ -10,6 +10,7 @@ import 'vuetify/dist/vuetify.min.css';
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import "vue-material/dist/theme/default.css";
+import UsersModule from './store/modules/UsersModule'
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.use(Vuetify)
@@ -18,7 +19,7 @@ Vue.use(VueMaterial)
 
 axios.interceptors.request.use(
   config => {
-      const token = localStorage.getItem("access_token");
+      const token = UsersModule.accessToken;
       if (token) {
           config.headers['Authorization'] = 'Bearer ' + token;
       }

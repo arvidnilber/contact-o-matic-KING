@@ -10,10 +10,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { ContactItem } from '@/App.vue';
+import { ContactItem } from '../App.vue';
 import ContactCard from '@/components/ContactCard.vue'
 import jwt from 'jsonwebtoken';
-import ContactModule from '@/store/modules/ContactModule'
+import ContactModule from '../store/modules/ContactModule'
 
 @Component({
     components: {

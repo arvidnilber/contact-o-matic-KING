@@ -1,22 +1,22 @@
 <template>
-      <v-content>
-        <v-container class="fill-height text-center">
-          <v-row align="center" justify="center">
-            <v-card class="px-24 py-10">
-              <h1 class="text-3xl">Edit</h1>
-              <div>
-                <input @blur="editContact" class="bg-white focus:outline-none focus:border-b-2 border-solid border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal text-2xl text-center" v-model="full_name" type="text">
-              </div>
-            </v-card>
-          </v-row>
-        </v-container>
-      </v-content> 
+  <div class="border-b-2 bg-gray-200 w-full">
+    <div class="contact-edit">
+      <h1 class="mt-10 text-3xl font-medium">Edit contact</h1>
+      <div class="edit-contact">
+        <md-field>
+          <md-input class="text-center" @blur="editContact" v-model="full_name"></md-input>
+        </md-field>    
+      </div>
+    </div>
+  </div>
+
+
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ContactItem } from "../App.vue";
-import ContactModule from '@/store/modules/ContactModule'
+import ContactModule from '../store/modules/ContactModule'
 
 @Component
 export default class EditContact extends Vue {
@@ -33,5 +33,24 @@ export default class EditContact extends Vue {
   }
 }
 </script>
-<style>
+<style scoped>
+  .md-field.md-theme-default:after {
+    padding-top: 5px;
+    background-color: rgba(0,0,0,0) !important;
+  }
+  .md-field.md-focused .md-input, .md-field.md-focused .md-textarea, .md-field.md-has-value .md-input, .md-field.md-has-value .md-textarea {
+    font-size: 20px !important;
+    padding-bottom: 15px;
+  }
+
+  .contact-edit {
+    width:400px;
+    margin:0 auto;
+  }
+
+  .edit-contact {
+    width:200px;
+    margin: 0 auto;
+  }
+
 </style>

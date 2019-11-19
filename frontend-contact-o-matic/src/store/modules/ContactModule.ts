@@ -1,7 +1,8 @@
-import {VuexModule, Module, getModule, Action, Mutation} from 'vuex-module-decorators';
+import {VuexModule, Module, getModule, Action, Mutation} from '@bartvanvliet/vuex-module-decorators';
 import store from '@/store';
 import Vue from 'vue';
 import axios from 'axios';
+import UsersModule from './UsersModule';
 
 // Defines structure of a todoItem
 export interface ContactItem {
@@ -16,7 +17,7 @@ export interface ContactItem {
 
 interface ContactObject { [id: string]: ContactItem}
 
-@Module({dynamic: true, namespaced: true, name: "ContactModule", store: store})
+@Module({dynamic: true, namespaced: true, name: "ContactModule", store: store, preserveState: true})
 class ContactModule extends VuexModule {
     public contactList : ContactObject= {};
 
@@ -36,8 +37,7 @@ class ContactModule extends VuexModule {
     
     @Action({rawError: true})
     async fetchAllContacts() {
-        const userId = localStorage.getItem("userId")
-        console.log(userId)
+        const userId = UsersModule.currentUser
         if(userId) {
             const response = await axios.get(`http://localhost:9292/api/v1/users/${userId}/contacts`);
             const contacts : ContactObject = response.data;
@@ -71,16 +71,7 @@ class ContactModule extends VuexModule {
 
     @Action({rawError: true})
     async editContact(contactItem: ContactItem) {
-        console.log(contactItem, 'module')
-
-        const response = await axios.patch(`http://localhost:9292/api/v1/contacts/${contactItem.id}`, 
-        {
-            company:contactItem.company, 
-            first_name: contactItem.first_name,
-            last_name: contactItem.last_name,
-            phone: contactItem.phone,
-            email: contactItem.email
-        })
+        const response = await axios.patch(`http://localhost:9292/api/v1/contacts/${contactItem.id}`, contactItem)
         return response
     }
 

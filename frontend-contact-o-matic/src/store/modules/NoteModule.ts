@@ -1,8 +1,7 @@
-import {VuexModule, Module, getModule, Action, Mutation} from 'vuex-module-decorators';
+import {VuexModule, Module, getModule, Action, Mutation} from '@bartvanvliet/vuex-module-decorators';
 import store from '@/store';
 import Vue from 'vue';
 import axios from 'axios';
-import { noteItem } from './ContactModule';
 
 // Defines structure of a todoItem
 export interface NoteItem {
@@ -14,10 +13,10 @@ export interface NoteItem {
 
 interface NoteObject { [id: string]: NoteItem}
 
-@Module({dynamic: true, namespaced: true, name: "NodeModule", store: store})
+@Module({dynamic: true, namespaced: true, name: "NoteModule", store: store, preserveState: true})
 class NoteModule extends VuexModule {
     public noteList : NoteObject= {};
-    get NoteListAsArray() {
+    get noteListAsArray() {
         return Object.keys(this.noteList).map(id => this.noteList[id]);
     }
 
@@ -32,10 +31,12 @@ class NoteModule extends VuexModule {
     }
     
     @Action({rawError: true})
-    async fetchAllNotes(noteItem: noteItem, ) {
-        if(noteItem.id) {
-            const response = await axios.get(`http://localhost:9292/api/v1/contacts/${noteItem.id}/notes`); 
-            const notes: NoteObject = response.data;                
+    async fetchAllNotesFromUser(contactId: string) {
+        console.log(contactId, 'notes')
+        if(contactId) {
+            const response = await axios.get(`http://localhost:9292/api/v1/contacts/${contactId}/notes`); 
+            const notes: NoteObject = response.data;    
+            console.log(response.data, 'notes data')            
             Object.keys(notes).forEach((id: string) => {
                 const note = notes[id];
                 this.setNote(note);
@@ -60,18 +61,13 @@ class NoteModule extends VuexModule {
 
     @Action({rawError: true})
     async fetchSingleNote(noteItem: NoteItem) {
-        const response = await axios.get(`http://localhost:9292/api/v1/contacts/${noteItem.id}`)
+        const response = await axios.get(`http://localhost:9292/api/v1/notes/${noteItem.id}`)
         return response.data
     }
 
     @Action({rawError: true})
     async editNote(noteItem: NoteItem) {
-
-        const response = await axios.patch(`http://localhost:9292/api/v1/notes/${noteItem.id}`, 
-        {   
-            conpany_id: noteItem.company_id,
-            text: noteItem.text
-        })
+        const response = await axios.patch(`http://localhost:9292/api/v1/notes/${noteItem.id}`, noteItem)
         return response
     }
 

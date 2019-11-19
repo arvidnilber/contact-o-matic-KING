@@ -50,7 +50,7 @@ class Seeder
 
     60.times do 
       company_id = rand(1..20)
-      user_id = rand(1..2)
+      user_id = rand(1..20)
       text = Faker::Lorem.sentence(word_count: 3, random_words_to_add: 7)
       db.execute('INSERT INTO notes (company_id, user_id, text) VALUES (?,?,?)', company_id, user_id, text)
     end
